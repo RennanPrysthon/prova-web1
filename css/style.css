@@ -44,3 +44,7 @@ main {
 #tab > div.selected {
   border-color: lightblue;
 }
+
+#tab > div.checked {
+  background-color: lightseagreen;
+}
