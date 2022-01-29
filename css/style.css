@@ -52,3 +52,12 @@ main {
 #tab > div.checked {
   background-color: lightseagreen;
 }
+
+#mensagem {
+  border: 1px solid #333333;
+  padding: 5px;
+}
+
+#mensagem > span.mensagem-erro {
+  color: #e73421;
+}

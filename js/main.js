@@ -1,8 +1,25 @@
 const tab = document.querySelector('#tab');
 const tabSizes = document.querySelector('#tabSizes');
 const resetButton = document.querySelector('#reset-btn');
+const mensagens = document.querySelector('#mensagem');
 
 let tabSize = 8;
+
+function limparMensagens() {
+  mensagens.innerHTML = '';
+}
+
+function exibirMensagem(mensagem, error = false) {
+  limparMensagens();
+  let span = document.createElement('span');
+  if (error) {
+    span.classList.add('mensagem-erro')
+  }
+
+  span.innerText = mensagem;
+
+  mensagens.appendChild(span);
+}
 
 function clearChecked() {
   let allChecked = document.querySelectorAll('#tab > div.checked') || []
@@ -77,12 +94,17 @@ function drawLines() {
 function onClickTabItem(event) {
   let { target } = event
   
-  if (
-    target.classList.contains('checked') ||
-    target.classList.contains('selected')
-  ) {
+  if (target.classList.contains('checked')) {
+    exibirMensagem('Posição inválida!', true);
     return;
   }
+
+  if (target.classList.contains('selected')) {
+    exibirMensagem("Posição já contém uma dama!", true);
+    return;
+  }
+
+  limparMensagens()
   
   target.classList.toggle('selected')
 
@@ -92,6 +114,8 @@ function onClickTabItem(event) {
 }
 
 function onRightClickTabItem(event) { 
+  limparMensagens()
+
   let { target } = event;
 
   if (target.classList.contains('selected')) {
