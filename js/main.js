@@ -4,12 +4,13 @@ const resetButton = document.querySelector('#reset-btn');
 const mensagens = document.querySelector('#mensagem');
 
 let tabSize = 8;
+let rounds = 0;
 
 function limparMensagens() {
   mensagens.innerHTML = '';
 }
 
-function exibirMensagem(mensagem, error = false) {
+function showMessage(mensagem, error = false) {
   limparMensagens();
   let span = document.createElement('span');
   if (error) {
@@ -91,16 +92,28 @@ function drawLines() {
   })
 }
 
+function checarFinalDeJogo() {
+  let allAvailable = document.querySelectorAll('#tab > div:not(.checked, .selected)').length
+
+  if (rounds === tabSize && allAvailable === 0) {
+    showMessage("Parabéns, combinação encontrada");
+  }
+
+  if (allAvailable === 0 && rounds < tabSize) {
+    showMessage("Combinação incorreta, tente novamente", true)
+  }
+}
+
 function onClickTabItem(event) {
   let { target } = event
   
   if (target.classList.contains('checked')) {
-    exibirMensagem('Posição inválida!', true);
+    showMessage('Posição inválida!', true);
     return;
   }
 
   if (target.classList.contains('selected')) {
-    exibirMensagem("Posição já contém uma dama!", true);
+    showMessage("Posição já contém uma dama!", true);
     return;
   }
 
@@ -108,10 +121,11 @@ function onClickTabItem(event) {
 
   target.classList.add('selected');
   target.innerHTML = QUEEN_ICON
+  rounds++;
 
   drawLines()
 
-  target.classList.remove('checked')
+  checarFinalDeJogo()
 }
 
 function onRightClickTabItem(event) { 
@@ -123,6 +137,7 @@ function onRightClickTabItem(event) {
     target.classList.remove('selected');
     target.innerHTML = '';
     drawLines()
+    rounds--;
     event.preventDefault();
   }
 }
@@ -155,9 +170,13 @@ function drawTab(size = tabSize) {
 tabSizes.addEventListener('change', (event) => {
   let { target: { value } } = event
   value = Number(value);
+  rounds = 0;
   drawTab(value);
 })
 
-resetButton.addEventListener('click', () => drawTab())
+resetButton.addEventListener('click', () => {
+  rounds = 0;
+  drawTab()
+})
 
 drawTab();
