@@ -12,7 +12,6 @@ function clearChecked() {
 }
 
 function drawLines() {
-  console.clear()
   clearChecked()
 
   let allSelected = document.querySelectorAll('#tab > div.selected') || []
