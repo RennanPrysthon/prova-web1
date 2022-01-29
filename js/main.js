@@ -68,7 +68,7 @@ function drawLines() {
 
     diagonais.forEach(diag => {
       const el = document.querySelector(`#p${diag}`)
-      if (el) {
+      if (el && !el.classList.contains('selected')) {
         el.classList.add(`checked`)
       }
     })
@@ -79,8 +79,8 @@ function onClickTabItem(event) {
   let { target } = event
   
   if (
-    target.classList.contains('checked') &&
-    !target.classList.contains('selected')
+    target.classList.contains('checked') ||
+    target.classList.contains('selected')
   ) {
     return;
   }
@@ -88,6 +88,7 @@ function onClickTabItem(event) {
   target.classList.toggle('selected')
 
   drawLines()
+
   target.classList.remove('checked')
 }
 
