@@ -76,3 +76,32 @@ main {
 #mensagem > span.mensagem-erro {
   color: #e73421;
 }
+
+.controls {
+  display: flex;
+  align-items: center;
+  max-width: 440px;
+  min-height: 50px;
+  width: 100%;
+  gap: 5px;
+}
+
+.controls > #mensagem {
+  align-self: stretch;
+  flex: 1;
+}
+
+.controls > button {
+  border: 0;
+  align-self: stretch;
+  padding: 0 10px;
+  background-color: #779455;
+  color: #ffffff;
+}
+
+.controls > select {
+  align-self: stretch;
+  padding: 0 10px;
+  background-color: #779455;
+  color: #fff;
+}
