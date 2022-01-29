@@ -15,3 +15,32 @@ a {
   text-decoration: none;
   color: inherit;
 }
+
+main {
+  margin: 20px 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+#tabuleiro {
+  display: grid;
+  grid-template-columns: repeat(2, 50px);
+  grid-template-rows: repeat(2, 50px);
+  gap: 5px;
+  margin-bottom: 10px;
+}
+
+#tabuleiro > div {
+  width: 50px;
+  height: 50px;
+
+  background-color: red;
+  border: 5px solid brown;
+}
+
+#tabuleiro > div.selected {
+  border-color: lightblue;
+}
