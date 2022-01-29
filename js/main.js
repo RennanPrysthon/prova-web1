@@ -10,20 +10,20 @@ function onClickTabItem(event) {
   target.classList.toggle('selected')
 }
 
-function drawTab(size = 4) {
+function drawTab(size = tabSize) {
   tabuleiro.innerHTML = '';
-
   tabSize = size;
+
   const totalValues = size * size;
 
-  const divList = Array(Number(totalValues)).fill(null)
-  
-  divList.forEach((_) => {
-    let ele = document.createElement('div')
-    ele.onclick = onClickTabItem
+  for (let i = 0; i < size; i++) {
+    for (let j = 0; j < size; j++) {
+      let ele = document.createElement('div')
+      ele.onclick = onClickTabItem
 
-    tabuleiro.appendChild(ele)
-  })
+      tabuleiro.appendChild(ele)
+    }  
+  }
 
   let style = `repeat(${size}, 50px)`;
   tabuleiro.style.gridTemplateColumns = style ;
