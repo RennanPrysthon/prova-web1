@@ -105,8 +105,9 @@ function onClickTabItem(event) {
   }
 
   limparMensagens()
-  
-  target.classList.toggle('selected')
+
+  target.classList.add('selected');
+  target.innerHTML = QUEEN_ICON
 
   drawLines()
 
@@ -120,6 +121,7 @@ function onRightClickTabItem(event) {
 
   if (target.classList.contains('selected')) {
     target.classList.remove('selected');
+    target.innerHTML = '';
     drawLines()
     event.preventDefault();
   }
@@ -131,9 +133,12 @@ function drawTab(size = tabSize) {
 
   for (let i = 0; i < size; i++) {
     for (let j = 0; j < size; j++) {
+      let isEven = (i + j) % 2 === 0;
+
       let ele = document.createElement('div')
       ele.id = `p${i}-${j}`;
-      ele.innerHTML = `p${i}-${j}`;
+
+      ele.classList.add(isEven ? 'color-1' : 'color-2')
 
       ele.onclick = onClickTabItem
       ele.oncontextmenu = onRightClickTabItem
