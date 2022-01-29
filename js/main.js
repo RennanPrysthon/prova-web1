@@ -91,6 +91,16 @@ function onClickTabItem(event) {
   target.classList.remove('checked')
 }
 
+function onRightClickTabItem(event) { 
+  let { target } = event;
+
+  if (target.classList.contains('selected')) {
+    target.classList.remove('selected');
+    drawLines()
+    event.preventDefault();
+  }
+}
+
 function drawTab(size = tabSize) {
   tab.innerHTML = '';
   tabSize = size;
@@ -102,6 +112,7 @@ function drawTab(size = tabSize) {
       ele.innerHTML = `p${i}-${j}`;
 
       ele.onclick = onClickTabItem
+      ele.oncontextmenu = onRightClickTabItem
 
       tab.appendChild(ele)
     }  
