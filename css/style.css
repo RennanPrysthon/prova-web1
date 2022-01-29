@@ -76,6 +76,11 @@ main {
 #mensagem {
   border: 1px solid #333333;
   padding: 5px;
+  width: 100%;
+  max-width: 440px;
+  min-height: 40px;
+  margin-top: 5px;
+  text-align: center;
 }
 
 #mensagem > span.mensagem-erro {
@@ -85,15 +90,11 @@ main {
 .controls {
   display: flex;
   align-items: center;
+  justify-content: center;
   max-width: 440px;
   min-height: 50px;
   width: 100%;
   gap: 5px;
-}
-
-.controls > #mensagem {
-  align-self: stretch;
-  flex: 1;
 }
 
 .controls > button {
