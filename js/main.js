@@ -2,7 +2,7 @@ const tab = document.querySelector('#tab');
 const tabSizes = document.querySelector('#tabSizes');
 const resetButton = document.querySelector('#reset-btn');
 
-let tabSize = 4;
+let tabSize = 8;
 
 function clearChecked() {
   let allChecked = document.querySelectorAll('#tab > div.checked') || []
@@ -12,30 +12,64 @@ function clearChecked() {
 }
 
 function drawLines() {
+  console.clear()
   clearChecked()
 
   let allSelected = document.querySelectorAll('#tab > div.selected') || []
   
   allSelected.forEach(el => {
-    let [posY, posX] = el.id.substr(1).split('-').map(val => Number(val))
+    let [posX, posY] = el.id
+      .substr(1)
+      .split('-')
+      .map(val => Number(val))
 
-    let elements = []
+    let diagonais = []
   
     for (let i = 0; i < tabSize; i++) {
-      let query = `#p${posY}-${i}`;
-      let element = document.querySelector(query)
-      elements.push(element)
+      diagonais.push(`${posX}-${i}`)
     }
   
     for (let i = 0; i < tabSize; i++) {
-      let query = `#p${i}-${posX}`;
-      let element = document.querySelector(query)
-      elements.push(element)
+      diagonais.push(`${i}-${posY}`)
     }
-  
-    elements.forEach(ele =>{
-      if (!ele.classList.contains(`checked`)) {
-        ele.classList.add(`checked`);
+
+    let x = posX;
+    let y = posY;
+    
+    while(x > 0 && y < tabSize) {
+      x--;
+      y++;
+
+      diagonais.push(`${x}-${y}`)
+    }
+    
+    while(x < tabSize && y > 0) {
+      x++
+      y--;
+      diagonais.push(`${x}-${y}`)
+    }
+    
+    x = posX;
+    y = posY;
+
+    while(x > 0 && y > 0) {
+      x--;
+      y--;
+      diagonais.push(`${x}-${y}`)
+    }
+
+    while(x < tabSize && y < tabSize) {
+      x++;
+      y++;
+      diagonais.push(`${x}-${y}`)
+    }
+
+    diagonais = [...new Set([...diagonais])]
+
+    diagonais.forEach(diag => {
+      const el = document.querySelector(`#p${diag}`)
+      if (el) {
+        el.classList.add(`checked`)
       }
     })
   })
@@ -65,6 +99,8 @@ function drawTab(size = tabSize) {
     for (let j = 0; j < size; j++) {
       let ele = document.createElement('div')
       ele.id = `p${i}-${j}`;
+      ele.innerHTML = `p${i}-${j}`;
+
       ele.onclick = onClickTabItem
 
       tab.appendChild(ele)

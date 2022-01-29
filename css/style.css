@@ -39,6 +39,10 @@ main {
 
   background-color: red;
   border: 5px solid brown;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 #tab > div.selected {
