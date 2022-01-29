@@ -6,12 +6,12 @@ const mensagens = document.querySelector('#mensagem');
 let tabSize = 8;
 let rounds = 0;
 
-function limparMensagens() {
+function clearMessages() {
   mensagens.innerHTML = '';
 }
 
 function showMessage(mensagem, error = false) {
-  limparMensagens();
+  clearMessages();
   let span = document.createElement('span');
   if (error) {
     span.classList.add('mensagem-erro')
@@ -117,7 +117,7 @@ function onClickTabItem(event) {
     return;
   }
 
-  limparMensagens()
+  clearMessages()
 
   target.classList.add('selected');
   target.innerHTML = QUEEN_ICON
@@ -129,7 +129,7 @@ function onClickTabItem(event) {
 }
 
 function onRightClickTabItem(event) { 
-  limparMensagens()
+  clearMessages()
 
   let { target } = event;
 
@@ -171,12 +171,14 @@ tabSizes.addEventListener('change', (event) => {
   let { target: { value } } = event
   value = Number(value);
   rounds = 0;
+  clearMessages()
   drawTab(value);
 })
 
 resetButton.addEventListener('click', () => {
   rounds = 0;
   drawTab()
+  clearMessages()
 })
 
 drawTab();
