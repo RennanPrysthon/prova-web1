@@ -1,4 +1,4 @@
-const tabuleiro = document.querySelector('#tabuleiro');
+const tab = document.querySelector('#tab');
 const tabSizes = document.querySelector('#tabSizes');
 const resetButton = document.querySelector('#reset-btn');
 
@@ -11,23 +11,21 @@ function onClickTabItem(event) {
 }
 
 function drawTab(size = tabSize) {
-  tabuleiro.innerHTML = '';
+  tab.innerHTML = '';
   tabSize = size;
-
-  const totalValues = size * size;
 
   for (let i = 0; i < size; i++) {
     for (let j = 0; j < size; j++) {
       let ele = document.createElement('div')
       ele.onclick = onClickTabItem
 
-      tabuleiro.appendChild(ele)
+      tab.appendChild(ele)
     }  
   }
 
   let style = `repeat(${size}, 50px)`;
-  tabuleiro.style.gridTemplateColumns = style ;
-  tabuleiro.style.gridTemplateRows = style;
+  tab.style.gridTemplateColumns = style ;
+  tab.style.gridTemplateRows = style;
 }
 
 tabSizes.addEventListener('change', (event) => {
